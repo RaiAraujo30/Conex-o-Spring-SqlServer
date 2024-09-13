@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Armazéns</title>
+</head>
+<body>
+    <h1>Lista de Armazéns</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Complemento</th>
+                <th>Bairro</th>
+                <th>Número</th>
+                <th>Rua</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="armazem : ${armazens}">
+                <td th:text="${armazem[0]}"></td>
+                <td th:text="${armazem[1]}"></td>
+                <td th:text="${armazem[2]}"></td>
+                <td th:text="${armazem[3]}"></td>
+                <td th:text="${armazem[4]}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
