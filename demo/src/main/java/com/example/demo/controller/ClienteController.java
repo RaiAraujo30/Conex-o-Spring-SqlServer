@@ -28,4 +28,11 @@ public class ClienteController {
         model.addAttribute("consulta9", clientes);
         return "consulta9";
     }
+
+    @GetMapping("/consulta2")
+    public String listClientesAmericanos(Model model) {
+        List<Object[]> clientes = clienteRepository.findClientesByCategoria();
+        model.addAttribute("consulta2", clientes);
+        return "consulta2";
+    }
 }

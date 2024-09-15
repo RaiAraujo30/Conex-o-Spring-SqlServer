@@ -25,8 +25,15 @@ public class ProdutoController {
 
     @GetMapping("/consulta7")
     public String listProductsArmazens(Model model) {
-        List<Object[]> produtosArmazens = produtoRepository.findProductsByarmazens();
-        model.addAttribute("consulta7", produtosArmazens);
+        List<Object[]> produtos = produtoRepository.findProductsByarmazens();
+        model.addAttribute("consulta7", produtos);
         return "consulta7";
+    }
+
+    @GetMapping("/consulta8")
+    public String listProductsPreco(Model model) {
+        List<Object[]> produtos = produtoRepository.findProductsByPrecoVenda();
+        model.addAttribute("consulta8", produtos);
+        return "consulta8";
     }
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Clientes</title>
+</head>
+<body>
+    <h1>Lista de Clientes dos Estados Unidos com Pedidos Acima de $10.000</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Limite de Crédito</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resultado : ${consulta2}">
+                <td th:text="${resultado[0]}"></td>
+                <td th:text="${resultado[1]}"></td>
+                <td th:text="${resultado[2]}"></td>
+                <td th:text="${resultado[3]}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
