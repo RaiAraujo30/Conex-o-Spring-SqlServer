@@ -21,4 +21,11 @@ public class ClienteController {
         model.addAttribute("clientes", clientes);
         return "clientes";
     }
+
+    @GetMapping("/consulta9")
+    public String listClientesPercentual(Model model) {
+        List<Object[]> clientes = clienteRepository.findClientesByPedidos();
+        model.addAttribute("consulta9", clientes);
+        return "consulta9";
+    }
 }

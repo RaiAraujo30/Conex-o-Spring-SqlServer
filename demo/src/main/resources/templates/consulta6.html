@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resultados da Consulta de Pedidos</title>
+</head>
+<body>
+    <h1>Resultados da Consulta de Pedidos</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Quantidade de Pedidos</th>
+                <th>Percentual (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resultado : ${consulta6}">
+                <td th:text="${resultado.quantidade_pedidos}"></td>
+                <td th:text="${resultado.percentual}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resultados da Consulta de Clientes</title>
+</head>
+<body>
+    <h1>Resultados da Consulta de Clientes</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Quantidade de Clientes</th>
+                <th>Percentual (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resultado : ${consulta9}">
+                <td th:text="${resultado[0]}"></td>
+                <td class="percentual" th:text="${resultado[1]}"></td>
+            </tr>
+            
+            <script>
+                document.querySelectorAll('.percentual').forEach(function(td) {
+                    let value = parseFloat(td.textContent);
+                    if (!isNaN(value)) {
+                        td.textContent = value.toFixed(2); // Formata o número para 2 casas decimais
+                    }
+                });
+            </script>
+        </tbody>
+    </table>
+</body>
+</html>
