@@ -14,10 +14,10 @@ public class ArmazemController {
     @Autowired
     private ArmazemRepository armazemRepository;
 
-    @GetMapping("/armazens")
+    @GetMapping("/consulta3")
     public String listArmazens(Model model) {
         List<Object[]> armazens = armazemRepository.findArmazensByElectronics();
-        model.addAttribute("armazens", armazens);
-        return "armazens";
+        model.addAttribute("consulta3", armazens);
+        return "consulta3";
     }
 }
