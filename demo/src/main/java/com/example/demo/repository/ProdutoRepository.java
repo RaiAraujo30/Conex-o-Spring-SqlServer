@@ -12,6 +12,7 @@ import com.example.demo.models.Produto;
 // entre o preço de venda e o preço de venda mínimo é menor que 2000 E que estão armazenados
 // em pelo menos 5 armazéns distintos.
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+    
     @Query(value = "SELECT PT.nome, PT.descricao, P.data_garantia " +
                    "FROM produto P, produto_traducao PT " +
                    "WHERE (P.preco_venda - P.preco_venda_min)< 2000 AND " +
