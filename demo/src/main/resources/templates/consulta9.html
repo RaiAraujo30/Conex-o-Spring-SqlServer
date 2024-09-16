@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados da Consulta de Clientes</title>
+    <!-- Link do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Resultados da Consulta de Clientes</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Quantidade de Clientes</th>
-                <th>Percentual (%)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="resultado : ${consulta9}">
-                <td th:text="${resultado[0]}"></td>
-                <td class="percentual" th:text="${resultado[1]}"></td>
-            </tr>
-            
-            <script>
-                document.querySelectorAll('.percentual').forEach(function(td) {
-                    let value = parseFloat(td.textContent);
-                    if (!isNaN(value)) {
-                        td.textContent = value.toFixed(2); // Formata o número para 2 casas decimais
-                    }
-                });
-            </script>
-        </tbody>
-    </table>
+    <div class="container mt-5">
+        <h1 class="mb-4">Resultados da Consulta de Clientes</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Quantidade de Clientes</th>
+                    <th>Percentual (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="resultado : ${consulta9}">
+                    <td th:text="${resultado[0]}"></td> <!-- Quantidade de Clientes -->
+                    <td class="percentual" th:text="${resultado[1]}"></td> <!-- Percentual -->
+                </tr>
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-primary mt-4">Voltar</a>
+    </div>
+
+    <!-- Script do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script para formatação do percentual -->
+    <script>
+        document.querySelectorAll('.percentual').forEach(function(td) {
+            let value = parseFloat(td.textContent);
+            if (!isNaN(value)) {
+                td.textContent = value.toFixed(2); // Formata o número para 2 casas decimais
+            }
+        });
+    </script>
 </body>
 </html>

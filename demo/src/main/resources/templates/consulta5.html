@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faturamento por Categoria e Ano</title>
+    <!-- Link do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Faturamento por Categoria e Ano</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Nome da Categoria</th>
-                <th>Ano</th>
-                <th>Faturamento Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="resultado : ${consulta5}"> <!-- necessário testes-->
-                <td th:text="${resultado[1]}"></td> <!-- nome_categoria -->
-                <td th:text="${resultado[0]}"></td> <!-- ano -->
-                <td th:text="${resultado[2]}"></td> <!-- faturamento_total -->
-            </tr>
-        </tbody>
-    </table>
+    <div class="container mt-5">
+        <h1 class="mb-4">Faturamento por Categoria e Ano</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome da Categoria</th>
+                    <th>Ano</th>
+                    <th>Faturamento Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="resultado : ${consulta5}">
+                    <td th:text="${resultado[1]}"></td> <!-- nome_categoria -->
+                    <td th:text="${resultado[0]}"></td> <!-- ano -->
+                    <td th:text="${resultado[2]}"></td> <!-- faturamento_total -->
+                </tr>
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-primary mt-4">Voltar</a>
+    </div>
+
+    <!-- Script do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

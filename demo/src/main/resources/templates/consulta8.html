@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Preços dos Produtos</title>
+    <!-- Link do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Lista de Preços dos Produtos</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Preço Tabela</th>
-                <th>Preço Mínimo de Venda</th>
-                <th>Preço Mínimo (2023-2024)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="resultado : ${consulta8}">
-                <td th:text="${resultado[0]}"></td> <!-- preco_tabela -->
-                <td th:text="${resultado[1]}"></td> <!-- preco_minimo_venda -->
-                <td th:text="${resultado[2]}"></td> <!-- preco_minimo_2023_2024 -->
-            </tr>
-        </tbody>
-    </table>
+    <div class="container mt-5">
+        <h1 class="mb-4">Lista de Preços dos Produtos</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Preço Tabela</th>
+                    <th>Preço Mínimo de Venda</th>
+                    <th>Preço Mínimo (2023-2024)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="resultado : ${consulta8}">
+                    <td th:text="${resultado[0]}"></td> <!-- Preço Tabela -->
+                    <td th:text="${resultado[1]}"></td> <!-- Preço Mínimo de Venda -->
+                    <td th:text="${resultado[2]}"></td> <!-- Preço Mínimo (2023-2024) -->
+                </tr>
+            </tbody>
+        </table>
+                <a href="/" class="btn btn-primary mt-4">Voltar</a>
+
+    </div>
+
+    <!-- Script do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
