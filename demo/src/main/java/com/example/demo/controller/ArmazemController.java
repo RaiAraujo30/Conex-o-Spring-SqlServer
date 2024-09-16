@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.models.Armazem;
-import com.example.demo.repository.ArmazemRepository;
 import com.example.demo.service.ArmazemService;
 
 import org.springframework.beans.factory.annotation.Autowired;

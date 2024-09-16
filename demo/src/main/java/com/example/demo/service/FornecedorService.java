@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.models.Fornecedor;
 import com.example.demo.repository.FornecedorRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FornecedorService {
     
     @Autowired

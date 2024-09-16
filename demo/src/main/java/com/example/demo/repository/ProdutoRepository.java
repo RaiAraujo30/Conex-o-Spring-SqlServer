@@ -23,4 +23,20 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
                                     "HAVING COUNT(distinct E.id_armazem)>=5)", nativeQuery = true)
                    List<Object[]> findProductsByarmazens();
 
+    //consulta 8
+    // Para cada produto, liste o preço de tabela do produto, o preço mínimo de venda
+    //  do produto e o valor de mínimo que o produto já foi vendido em 2024 ou em 2023.
+    @Query(value = "SELECT pr.preco_venda AS preco_tabela, " +
+                        "MIN(pr.preco_venda_min) AS preco_minimo_venda, " +
+                        "MIN(CASE WHEN YEAR(p.data_prazo) IN (2023, 2024) " +
+                        "THEN pr.preco_venda_min END) AS preco_minimo_2023_2024 " +
+                    "FROM produto pr " +
+                    "LEFT JOIN " +
+                        "item_pedido ip ON pr.id_produto = ip.id_produto " +
+                    "LEFT JOIN " +
+                        "pedido p ON ip.id_pedido = p.id_pedido " +
+                    "GROUP BY pr.preco_venda", nativeQuery = true)
+    List<Object[]> findProductsByPrecoVenda();
+
+
 }

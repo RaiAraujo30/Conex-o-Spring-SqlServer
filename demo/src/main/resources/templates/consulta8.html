@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Preços dos Produtos</title>
+</head>
+<body>
+    <h1>Lista de Preços dos Produtos</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Preço Tabela</th>
+                <th>Preço Mínimo de Venda</th>
+                <th>Preço Mínimo (2023-2024)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resultado : ${consulta8}">
+                <td th:text="${resultado[0]}"></td> <!-- preco_tabela -->
+                <td th:text="${resultado[1]}"></td> <!-- preco_minimo_venda -->
+                <td th:text="${resultado[2]}"></td> <!-- preco_minimo_2023_2024 -->
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+@RequestMapping("/clientes")
 @Controller
 public class ClienteController {
 
@@ -27,5 +29,12 @@ public class ClienteController {
         List<Object[]> clientes = clienteRepository.findClientesByPedidos();
         model.addAttribute("consulta9", clientes);
         return "consulta9";
+    }
+
+    @GetMapping("/consulta2")
+    public String listClientesAmericanos(Model model) {
+        List<Object[]> clientes = clienteRepository.findClientesByCategoria();
+        model.addAttribute("consulta2", clientes);
+        return "consulta2";
     }
 }

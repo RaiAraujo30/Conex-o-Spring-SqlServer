@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.models.TelefoneCliente;
 import com.example.demo.repository.TelefoneClienteRepostiory;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TelefoneClienteService {
     
     @Autowired

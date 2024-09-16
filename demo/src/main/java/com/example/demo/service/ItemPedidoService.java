@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.models.ItemPedido;
 import com.example.demo.repository.ItemPedidoRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ItemPedidoService {
     
     @Autowired

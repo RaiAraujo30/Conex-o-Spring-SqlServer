@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.models.EmailCliente;
 import com.example.demo.repository.EmailClienteRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EmailClienteService {
     
     @Autowired

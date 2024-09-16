@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import com.example.demo.models.Armazem;
 import com.example.demo.repository.ArmazemRepository;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class ArmazemService {
 
     @Autowired

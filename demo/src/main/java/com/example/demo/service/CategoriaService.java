@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.models.Categoria;
 import com.example.demo.repository.CategoriaRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CategoriaService {
     
     @Autowired
@@ -32,5 +34,5 @@ public class CategoriaService {
         return categoriaRepository.findById(id).get();
     }
 
-    
+
 }

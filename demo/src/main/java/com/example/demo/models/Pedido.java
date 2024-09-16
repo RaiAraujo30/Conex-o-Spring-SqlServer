@@ -3,6 +3,9 @@ package com.example.demo.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +28,9 @@ public class Pedido {
     @JoinColumn(name = "idCliente", nullable = false)
     @NotNull
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemPedido> itensPedido = new ArrayList<>();
 
     // Getters and Setters
 }

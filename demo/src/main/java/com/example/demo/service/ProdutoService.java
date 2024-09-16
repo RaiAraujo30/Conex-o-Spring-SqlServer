@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.models.Produto;
 import com.example.demo.repository.ProdutoRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProdutoService {
     
     @Autowired
@@ -35,6 +37,11 @@ public class ProdutoService {
     //findProductsByarmazens
     public List<Object[]> getProductsByarmazens() {
         return produtoRepository.findProductsByarmazens();
+    }
+
+    //findProductsByPrecoVenda
+    public List<Object[]> getProductsByPrecoVenda() {
+        return produtoRepository.findProductsByPrecoVenda();
     }
 
 }

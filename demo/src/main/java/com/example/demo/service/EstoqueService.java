@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.models.Estoque;
 import com.example.demo.repository.EstoqueRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EstoqueService {
     
     @Autowired
