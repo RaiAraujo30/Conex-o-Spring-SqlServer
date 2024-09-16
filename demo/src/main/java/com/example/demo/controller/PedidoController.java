@@ -62,32 +62,32 @@ public class PedidoController {
         return "Pedido/createPedido";
     }
 
-    @PostMapping("/create")
-    public String createPedido(@ModelAttribute("pedido") Pedido pedido, BindingResult bindingResult,
-                               @RequestParam("produtos") List<Long> produtosIds, 
-                               @RequestParam("quantidades") List<Integer> quantidades, 
-                               Model model) {
-        if (bindingResult.hasErrors()) {
-            // Recarrega clientes e produtos em caso de erro
-            model.addAttribute("clientes", clienteService.findAll());
-            model.addAttribute("produtos", produtoService.findAll());
-            return "Pedido/createPedido";
-        }
+    // @PostMapping("/create")
+    // public String createPedido(@ModelAttribute("pedido") Pedido pedido, BindingResult bindingResult,
+    //                            @RequestParam("produtos") List<Long> produtosIds, 
+    //                            @RequestParam("quantidades") List<Integer> quantidades, 
+    //                            Model model) {
+    //     if (bindingResult.hasErrors()) {
+    //         // Recarrega clientes e produtos em caso de erro
+    //         model.addAttribute("clientes", clienteService.findAll());
+    //         model.addAttribute("produtos", produtoService.findAll());
+    //         return "Pedido/createPedido";
+    //     }
 
-        // Adiciona os itens de pedido ao pedido
-        for (int i = 0; i < produtosIds.size(); i++) {
-            Produto produto = produtoService.findById(produtosIds.get(i));
-            ItemPedido itemPedido = new ItemPedido();
-            itemPedido.setPedido(pedido);
-            itemPedido.setProduto(produto);
-            itemPedido.setQuantidade(quantidades.get(i));
-            itemPedido.setPreco(produto.getPrecoVenda());
-            pedido.getItensPedido().add(itemPedido);
-        }
+    //     // Adiciona os itens de pedido ao pedido
+    //     for (int i = 0; i < produtosIds.size(); i++) {
+    //         Produto produto = produtoService.findById(produtosIds.get(i));
+    //         ItemPedido itemPedido = new ItemPedido();
+    //         itemPedido.setPedido(pedido);
+    //         itemPedido.setProduto(produto);
+    //         itemPedido.setQuantidade(quantidades.get(i));
+    //         itemPedido.setPreco(produto.getPrecoVenda());
+    //         pedido.getItensPedido().add(itemPedido);
+    //     }
 
-        pedidoService.save(pedido);
-        return "redirect:/pedidos";
-    }
+    //     pedidoService.save(pedido);
+    //     return "redirect:/pedidos";
+    // }
 
     @GetMapping("/update/{id}")
     public String updatePedidoForm(@PathVariable("id") Long id, Model model) {
@@ -106,33 +106,33 @@ public class PedidoController {
         return "Pedido/updatePedido";
     }
 
-    @PostMapping("/update")
-    public String updatePedido(@ModelAttribute("pedido") Pedido pedido, BindingResult bindingResult,
-                               @RequestParam("produtos") List<Long> produtosIds, 
-                               @RequestParam("quantidades") List<Integer> quantidades, 
-                               Model model) {
-        if (bindingResult.hasErrors()) {
-            // Recarrega clientes e produtos em caso de erro
-            model.addAttribute("clientes", clienteService.findAll());
-            model.addAttribute("produtos", produtoService.findAll());
-            return "Pedido/updatePedido";
-        }
+    // @PostMapping("/update")
+    // public String updatePedido(@ModelAttribute("pedido") Pedido pedido, BindingResult bindingResult,
+    //                            @RequestParam("produtos") List<Long> produtosIds, 
+    //                            @RequestParam("quantidades") List<Integer> quantidades, 
+    //                            Model model) {
+    //     if (bindingResult.hasErrors()) {
+    //         // Recarrega clientes e produtos em caso de erro
+    //         model.addAttribute("clientes", clienteService.findAll());
+    //         model.addAttribute("produtos", produtoService.findAll());
+    //         return "Pedido/updatePedido";
+    //     }
 
-        // Atualiza os itens do pedido
-        pedido.getItensPedido().clear();
-        for (int i = 0; i < produtosIds.size(); i++) {
-            Produto produto = produtoService.findById(produtosIds.get(i));
-            ItemPedido itemPedido = new ItemPedido();
-            itemPedido.setPedido(pedido);
-            itemPedido.setProduto(produto);
-            itemPedido.setQuantidade(quantidades.get(i));
-            itemPedido.setPreco(produto.getPrecoVenda());
-            pedido.getItensPedido().add(itemPedido);
-        }
+    //     // Atualiza os itens do pedido
+    //     pedido.getItensPedido().clear();
+    //     for (int i = 0; i < produtosIds.size(); i++) {
+    //         Produto produto = produtoService.findById(produtosIds.get(i));
+    //         ItemPedido itemPedido = new ItemPedido();
+    //         itemPedido.setPedido(pedido);
+    //         itemPedido.setProduto(produto);
+    //         itemPedido.setQuantidade(quantidades.get(i));
+    //         itemPedido.setPreco(produto.getPrecoVenda());
+    //         pedido.getItensPedido().add(itemPedido);
+    //     }
 
-        pedidoService.save(pedido);
-        return "redirect:/pedidos";
-    }
+    //     pedidoService.save(pedido);
+    //     return "redirect:/pedidos";
+    // }
 
     @GetMapping("/delete/{id}")
     public String deletePedido(@PathVariable("id") Long id) {
