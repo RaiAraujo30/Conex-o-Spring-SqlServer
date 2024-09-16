@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Estoque por Armazém e Categoria</title>
+</head>
+<body>
+    <h1>Estoque por Armazém e Categoria</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome do Armazém</th>
+                <th>Código do Estoque</th>
+                <th>Nome da Categoria</th>
+                <th>Total de Produtos</th>
+                <th>Média de Produtos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resultado : ${consulta1}"> <!-- necessário testes-->
+                <td th:text="${resultado[0]}"></td> <!-- nomeArmazem -->
+                <td th:text="${resultado[1]}"></td> <!-- codigo -->
+                <td th:text="${resultado[2]}"></td> <!-- nomeCategoria -->
+                <td th:text="${resultado[3]}"></td> <!-- totalProdutos -->
+                <td th:text="${resultado[4]}"></td> <!-- mediaProdutos -->
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

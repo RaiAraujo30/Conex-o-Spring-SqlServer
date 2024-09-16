@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Clientes dos Estados Unidos</title>
+</head>
+<body>
+    <h1>Clientes dos Estados Unidos com Pedidos Finalizados</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome do Cliente</th>
+                <th>Rua</th>
+                <th>Número</th>
+                <th>Complemento</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>País</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="resultado : ${consulta10}"> <!-- necessário testes-->
+                <td th:text="${resultado[0]}"></td> <!-- nome_cliente -->
+                <td th:text="${resultado[1]}"></td> <!-- rua -->
+                <td th:text="${resultado[2]}"></td> <!-- numero -->
+                <td th:text="${resultado[3]}"></td> <!-- complemento -->
+                <td th:text="${resultado[4]}"></td> <!-- bairro -->
+                <td th:text="${resultado[5]}"></td> <!-- cidade -->
+                <td th:text="${resultado[6]}"></td> <!-- estado -->
+                <td th:text="${resultado[7]}"></td> <!-- pais -->
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
