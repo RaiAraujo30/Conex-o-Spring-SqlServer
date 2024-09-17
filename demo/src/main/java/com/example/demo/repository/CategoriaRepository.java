@@ -8,65 +8,48 @@ import org.springframework.data.jpa.repository.Query;
 import com.example.demo.models.Categoria;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
-    
-    //consulta5 //consulta com problemas
-    // Liste as 8 categorias de produto que produziram o maior faturamento para a empresa
-    // nos últimos seis meses de cada um dos últimos 5 anos.
-    @Query(value = "SELECT " +
-                        "faturamento.ano, " +
-                        "faturamento.nome_categoria, " +
-                        "faturamento.faturamento_total " +
-                    "FROM   (SELECT " +
-                                "YEAR(p.data_prazo) AS ano, " +
-                                "cat.nome AS nome_categoria, " +
-                            "SUM(ip.quantidade * ip.preco) AS faturamento_total " +
-                            "FROM " +
-                                "pedido p " +
-                            "JOIN " +
-                                "item_pedido ip ON p.id_pedido = ip.id_pedido " +
-                            "JOIN " +
-                                "produto pr ON ip.id_produto = pr.id_produto " +
-                            "JOIN " +
-                                "categoria cat ON pr.id_categoria = cat.id_categoria " +
-                            "WHERE " +
-                                "p.status = 'Finalizado' " +
-                                "AND p.data_prazo >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR) " + //CURDATE não funciona no sqlserver
-                                "AND MONTH(p.data_prazo) IN (7, 8, 9, 10, 11, 12) " + //DATE_SUB não funciona no sqlserver
-                            "GROUP BY " +
-                                "ano, cat.id_categoria " +
-                            ") AS faturamento " +
-                    "WHERE " +
-                        "(faturamento.ano, faturamento.faturamento_total) IN ( " +
-                        "SELECT " +
-                            "sub.ano, " +
-                            "sub.faturamento_total " +
-                        "FROM ( " +
-                            "SELECT " +
-                                "YEAR(p.data_prazo) AS ano, " +
-                                "SUM(ip.quantidade * ip.preco) AS faturamento_total, " +
-                                "cat.id_categoria " +
-                            "FROM " +
-                                "pedido p " +
-                            "JOIN " +
-                                "item_pedido ip ON p.id_pedido = ip.id_pedido " +
-                            "JOIN " +
-                                "produto pr ON ip.id_produto = pr.id_produto " +
-                            "JOIN " +
-                                "categoria cat ON pr.id_categoria = cat.id_categoria " +
-                            "WHERE " +
-                                "p.status = 'Finalizado' " +
-                                "AND p.data_prazo >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR) " + //CURDATE e DATE_SUB
-                                "AND MONTH(p.data_prazo) IN (7, 8, 9, 10, 11, 12) " +
-                            "GROUP BY " +
-                                "ano, cat.id_categoria " +
-                            "ORDER BY " +
-                                "ano, faturamento_total DESC " +
-                                "LIMIT 8 " +
-                            ") AS sub " +
-                        ") " +
-                    "ORDER BY " +
-                        "faturamento.ano DESC, faturamento.faturamento_total DESC", 
-       nativeQuery = true)
-    List<Object[]> findCategoriaByFaturamento();
 
+    @Query(value = "WITH Faturamento AS ( " +
+            "SELECT " +
+            "c.id_categoria, " +
+            "c.nome AS categoria, " +
+            "SUM(ip.quantidade * ip.preco) AS faturamento, " +
+            "YEAR(p.data_prazo) AS ano, " +
+            "MONTH(p.data_prazo) AS mes " +
+            "FROM " +
+            "item_pedido ip " +
+            "JOIN " +
+            "pedido p ON ip.id_pedido = p.id_pedido " +
+            "JOIN " +
+            "produto pr ON ip.id_produto = pr.id_produto " +
+            "JOIN " +
+            "categoria c ON pr.id_categoria = c.id_categoria " +
+            "WHERE " +
+            "p.data_prazo >= DATEADD(MONTH, -6, GETDATE()) " +
+            "AND YEAR(p.data_prazo) BETWEEN YEAR(GETDATE()) - 4 AND YEAR(GETDATE()) " +
+            "GROUP BY " +
+            "c.id_categoria, c.nome, YEAR(p.data_prazo), MONTH(p.data_prazo) " +
+            "), " +
+            "RankedFaturamento AS ( " +
+            "SELECT " +
+            "categoria, " +
+            "faturamento, " +
+            "ano, " +
+            "mes, " +
+            "RANK() OVER (PARTITION BY ano, mes ORDER BY faturamento DESC) AS rnk " +
+            "FROM " +
+            "Faturamento " +
+            ") " +
+            "SELECT " +
+            "categoria, " +
+            "SUM(faturamento) AS total_faturamento " +
+            "FROM " +
+            "RankedFaturamento " +
+            "WHERE " +
+            "rnk <= 8 " +
+            "GROUP BY " +
+            "categoria " +
+            "ORDER BY " +
+            "total_faturamento DESC", nativeQuery = true)
+    List<Object[]> findCategoriaByFaturamento();
 }
