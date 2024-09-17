@@ -48,14 +48,18 @@
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
                 <tr>
+                    <th>Ano</th>
+                    <th>Mês</th>
                     <th>Nome da Categoria</th>
                     <th>Faturamento Total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="resultado : ${consulta5}">
-                    <td th:text="${resultado[0]}"></td> <!-- nome_categoria -->
-                    <td th:text="${resultado[1]}"></td> <!-- faturamento_total -->
+                    <td th:text="${resultado[0]}"></td> <!-- ano -->
+                    <td th:text="${resultado[1]}"></td> <!-- mes -->
+                    <td th:text="${resultado[2]}"></td> <!-- categoria (nome da categoria) -->
+                    <td th:text="${resultado[3]}"></td> <!-- total_faturamento -->
                 </tr>
             </tbody>
         </table>
