@@ -7,8 +7,10 @@ import com.example.demo.models.Categoria;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
+    //consulta 5
+    // Liste as 8 categorias de produto que produziram o maior faturamento para a empresa
+    // nos últimos seis meses de cada um dos últimos 5 anos.
 
-    //Consulta 5
     @Query(value = "WITH Faturamento AS ( " +
             "SELECT " +
             "c.id_categoria, " +
