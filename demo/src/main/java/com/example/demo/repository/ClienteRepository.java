@@ -50,6 +50,10 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
             "HAVING COUNT(p.id_pedido) > 20", nativeQuery = true)
     List<Object[]> findClientesByCategoria();
 
+    // consulta10
+    // Liste o nome completo e o endereço dos clientes americanos que realizaram um total de compras
+    // superior a 50 mil em cada um dos seguintes anos: 2024, 2023 e 2021 e que nunca realizaram compras
+    // de produtos de mais de uma categoria em uma mesma compra.
     @Query(value = "SELECT " +
                         "c.nome AS nome_cliente, " +
                         "c.rua, " +
