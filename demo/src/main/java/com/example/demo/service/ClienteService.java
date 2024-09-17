@@ -38,4 +38,10 @@ public class ClienteService {
     public List<Object[]> getClientesByPedidos() {
         return clienteRepository.findClientesByPedidos();
     }
+
+    //findClientesAmericanos
+    public List<Object[]> getClientesAmericanos() {
+        return clienteRepository.findClientesAmericanos();
+    }
+    
 }
