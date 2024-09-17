@@ -44,4 +44,13 @@ public class ProdutoService {
         return produtoRepository.findProductsByPrecoVenda();
     }
 
+    //findProductsByFornecedor
+    public List<Object[]> getProductsByFornecedor() {
+        return produtoRepository.findProductsByFornecedor();
+    }
+
+    //findProductsByEstoque
+    public List<Object[]> getProductsByEstoque() {
+        return produtoRepository.findProductsByEstoque();
+    }
 }

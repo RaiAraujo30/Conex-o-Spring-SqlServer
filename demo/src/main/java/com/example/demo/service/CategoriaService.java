@@ -34,5 +34,10 @@ public class CategoriaService {
         return categoriaRepository.findById(id).get();
     }
 
+    //findProductsByEstoque
+    public List<Object[]> getCategoriaByFaturamento() {
+        return categoriaRepository.findCategoriaByFaturamento();
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.antlr.v4.runtime.atn.SemanticContext.AND;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -38,5 +39,56 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
                     "GROUP BY pr.preco_venda", nativeQuery = true)
     List<Object[]> findProductsByPrecoVenda();
 
+    // consulta1  //consulta com problema
+    // Listar nome, descrição e preço mínimo de produtos que são fornecidos por
+    // fornecedores do Japão com mais de 120 em todos os armazéns.
+    @Query(value = "SELECT " +
+                        "pt.nome AS nome_produto, " +
+                        "pt.descricao AS descricao_produto, " +
+                        "p.preco_venda_min AS preco_minimo " +
+                    "FROM " +
+                        "produto p " +
+                    "INNER JOIN " +
+                        "fornecedor f ON p.id_fornecedor = f.id_fornecedor " +
+                    "INNER JOIN " +
+                        "estoque e ON p.id_produto = e.id_produto " +
+                    "INNER JOIN " +
+                        "produto_traducao pt ON p.id_produto = pt.id_produto " +
+                    "WHERE " +
+                        "f.pais = 'Japão' " +
+                    "GROUP BY " +
+                        "pt.nome, pt.descricao, p.preco_venda_min " +
+                    "HAVING " +
+                        "MIN(e.quantidade) > 120", 
+nativeQuery = true)
+
+    List<Object[]> findProductsByFornecedor();
+
+    //consulta 4 //testar consulta
+    // Liste a quantidade e a média da quantidade de produtos em cada estoque que possui 
+    // pelo menos 200 produtos, agrupados pelo armazém, código do estoque e categoria do produto.
+    @Query(value = "SELECT " +
+                        "a.nome AS nome_armazem, " +
+                        "e.codigo AS codigo_estoque, " +
+                        "c.nome AS nome_categoria, " +
+                        "SUM(e.quantidade) AS total_produtos, " +  // soma da quantidade total de produtos no estoque
+                        "AVG(e.quantidade) AS media_produtos " +   // média da quantidade de produtos no estoque
+                    "FROM " +
+                        "estoque e " +
+                    "INNER JOIN " +
+                        "armazem a ON e.id_armazem = a.id_armazem " +
+                    "INNER JOIN " +
+                        "produto p ON e.id_produto = p.id_produto " +
+                    "INNER JOIN " +
+                        "categoria c ON p.id_categoria = c.id_categoria " +
+                    "WHERE " +
+                        "e.quantidade >= 200 " +  // estoques com pelo menos 200 produtos
+                    "GROUP BY " +
+                        "a.nome, e.codigo, c.nome " +
+                    "HAVING " +
+                        "SUM(e.quantidade) >= 200", 
+       nativeQuery = true)
+
+    List<Object[]> findProductsByEstoque();
 
 }

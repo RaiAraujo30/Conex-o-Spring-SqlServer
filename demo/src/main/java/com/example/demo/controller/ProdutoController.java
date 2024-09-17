@@ -39,6 +39,20 @@ public class ProdutoController {
         return "produtos";
     }
 
+    @GetMapping("/consulta1")
+    public String listProductsFornecedorJapao(Model model) {
+        List<Object[]> produtos = produtoService.getProductsByFornecedor();
+        model.addAttribute("consulta1", produtos);
+        return "consulta1";
+    }
+
+    @GetMapping("/consulta4")
+    public String listProductsQuantidadeMedia(Model model) {
+        List<Object[]> produtos = produtoService.getProductsByEstoque();
+        model.addAttribute("consulta4", produtos);
+        return "consulta4";
+    }
+
     @GetMapping("/consulta7")
     public String listProductsArmazens(Model model) {
         List<Object[]> produtosArmazens = produtoService.getProductsByarmazens();

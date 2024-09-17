@@ -50,4 +50,35 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
             "HAVING COUNT(p.id_pedido) > 20", nativeQuery = true)
     List<Object[]> findClientesByCategoria();
 
+    @Query(value = "SELECT " +
+                        "c.nome AS nome_cliente, " +
+                        "c.rua, " +
+                        "c.numero, " +
+                        "c.complemento, " +
+                        "c.bairro, " +
+                        "c.cidade, " +
+                        "c.estado, " +
+                        "c.pais " +
+                    "FROM " +
+                        "cliente c " +
+                    "JOIN " +
+                        "pedido p ON c.id_cliente = p.id_cliente " +
+                    "JOIN " +
+                        "item_pedido ip ON p.id_pedido = ip.id_pedido " +
+                    "JOIN " +
+                        "produto pr ON ip.id_produto = pr.id_produto " +
+                    "JOIN " +
+                        "categoria cat ON pr.id_categoria = cat.id_categoria " +
+                    "WHERE " +
+                        "c.pais = 'Estados Unidos' " +
+                        "AND p.status = 'Finalizado' " +
+                        "AND p.data_prazo IN ('2024', '2023', '2021') " +
+                    "GROUP BY " +
+                        "c.id_cliente, c.nome, c.rua, c.numero, c.complemento, c.bairro, c.cidade, c.estado, c.pais " +
+                    "HAVING " +
+                        "SUM(ip.preco * ip.quantidade) > 50000 " +
+                        "AND COUNT(DISTINCT pr.id_categoria) = 1 " +
+                        "AND COUNT(DISTINCT p.data_prazo) = 3", nativeQuery = true)
+    List<Object[]> findClientesAmericanos();
+
 }
