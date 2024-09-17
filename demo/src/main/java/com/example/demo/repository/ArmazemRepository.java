@@ -13,12 +13,12 @@ public interface ArmazemRepository extends JpaRepository<Armazem, Long> {
     //  da categoria “eletrodomésticos” e que possuem menos de 1000 estoques no total.
      @Query(value = "SELECT A.nome, A.complemento, A.bairro, A.numero, A.rua " +
                    "FROM armazem A, estoque E, produto P, categoria C " +
-                   "WHERE C.nome = 'eletrônicos' AND " + //mudar de eletrônicos para eletrodomésticos
+                   "WHERE C.nome = 'eletrodomésticos' AND " + 
                    "C.id_categoria = P.id_categoria AND " +
                    "P.id_produto = E.id_produto AND " +
                    "E.id_armazem = A.id_armazem " +
                    "GROUP BY A.nome, A.complemento, A.bairro, A.numero, A.rua " +
-                   "HAVING COUNT(E.id_estoque) >= 2 AND " + //mudar de 2 para 200
+                   "HAVING COUNT(E.id_estoque) >= 200 AND " + 
                    "COUNT(E.id_estoque) < 1000", nativeQuery = true)
     List<Object[]> findArmazensByElectronics();
 }
